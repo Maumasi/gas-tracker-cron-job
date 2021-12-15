@@ -44,7 +44,7 @@ class GasTrackerAPI:
                     fee = gas_estimate['maxFeePerGas']
                     break
         
-        if(fee < threshhold):
+        if(fee and threshhold and (fee < threshhold)):
             estimate_str = ''
             for estimate in gas_data['estimatedPrices']:
                 estimate_str += f"Conf: { estimate['confidence'] }% | Price: ${ estimate['price'] }\n"
