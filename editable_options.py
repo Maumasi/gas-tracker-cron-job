@@ -14,6 +14,7 @@ OPTIONS = {
     
     # How many times perminute to check the current gas price: int
     #  - Example: 4 => (60 / 4) | AKA every 15 seconds
+    # Run once per min: 0 
     # Min value: 1
     # Max value: 30
     'CHECKS_PER_MINUTE': 4,

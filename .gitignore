@@ -170,7 +170,9 @@ cython_debug/
 .env
 env/
 !env/example.crypto_item.json
+!env/.gitkeep
 
 data/
 !data/.gitkeep
 !data/new_coin/.gitkeep
+
