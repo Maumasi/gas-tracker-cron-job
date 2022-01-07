@@ -5,11 +5,14 @@ from env import CONFIG
 
 class SlackBot():
     __postDict: Dict
-    
+
     def __init__(self, *args):
         self.__postDict = {
-            'url': CONFIG['SLACK_CHANNEL_WEBHOOK'],
-            'headers': { 'Content-type': 'application/json' },
+            'url': CONFIG['SLACK']['CHANNEL_WEBHOOK'],
+            'headers': {
+                'Content-type': 'application/json',
+                # 'Authorization:': f"Bearer {CONFIG['SLACK']['KEY']}",
+            },
             'data': ''
         }
 

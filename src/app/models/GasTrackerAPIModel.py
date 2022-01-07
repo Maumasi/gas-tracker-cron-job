@@ -13,8 +13,8 @@ class GasTrackerAPI:
     
     
     def getLatestGasEstimates(self):
-        url = f'https://{ CONFIG["BASE_URL"] }/gasprices/blockprices'    
-        response_raw = requests.get(url, headers={ 'Authorization': CONFIG['KEY'] })
+        url = f'https://{ CONFIG["BLOCKNATIVE"]["BASE_URL"] }/gasprices/blockprices'    
+        response_raw = requests.get(url, headers={ 'Authorization': CONFIG["BLOCKNATIVE"]['KEY'] })
         response_dict = response_raw.json()
         self.__send_notifications(response_dict)
         
@@ -26,19 +26,19 @@ class GasTrackerAPI:
         gas_data = gas_fee_responce['blockPrices'][0]
 
         # default to base fee
-        threshhold = OPTIONS['BASE_FEE']
+        threshhold = OPTIONS['THRESHHOLD_OPTIONS']['BASE_FEE']
         fee = float(gas_data['baseFeePerGas'])
         base_price = float(gas_data['baseFeePerGas'])
         
         if(OPTIONS['THRESHHOLD_TO_USE'] == ESTIMATED_GAS_PRICE): 
-            threshhold = OPTIONS['ESTIMATED_GAS_PRICE']
+            threshhold = OPTIONS['THRESHHOLD_OPTIONS']['ESTIMATED_GAS_PRICE']
             for gas_estimate in gas_data['estimatedPrices']:
                 if(gas_estimate['confidence'] == 99): 
                     fee = gas_estimate['price']
                     break
             
         elif(OPTIONS['THRESHHOLD_TO_USE'] == MAX_GAS_PRICE): 
-            threshhold = OPTIONS['MAX_GAS_PRICE']
+            threshhold = OPTIONS['THRESHHOLD_OPTIONS']['MAX_GAS_PRICE']
             for gas_estimate in gas_data['estimatedPrices']:
                 if(gas_estimate['confidence'] == 99): 
                     fee = gas_estimate['maxFeePerGas']
